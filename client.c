@@ -23,8 +23,7 @@ int main(int argc, char const *argv[])
   // 创建客户端socket描述符
   int client_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
   if (client_socket == -1){
-    // perror("socket error");
-    print_error(20,"socket_error");
+    print_error(__LINE__ - 2,"socket_error");
     return -1;
   }
 
@@ -38,8 +37,7 @@ int main(int argc, char const *argv[])
   // 与服务器建立连接
   int connected = connect(client_socket, (struct sockaddr *)&socket_address, addrlen);
   if (connected == -1){
-    // perror("connected error");
-    print_error(__LINE__ - 3,"connected error");
+    print_error(__LINE__ - 2,"connected error");
     return -1;
   }
 

@@ -32,20 +32,17 @@ int create_socket()
   socket_address.sin_port = htons(PORT);
   socket_address.sin_addr.s_addr = inet_addr(ADDRESS);
 
-  // setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
   int binded = bind(server_socket, (struct sockaddr *)&socket_address,
                     sizeof(socket_address));
   if (binded == -1){
-    // perror("bind");
-    print_error(35, "bind error");
+    print_error(__LINE__ - 2, "bind error");
     return -1;
   }
 
   int listend = listen(server_socket, 1);
   if (listend){
-    // perror("listen");
-    print_error(43, "listen error");
+    print_error(__LINE__ - 2, "listen error");
     return -1;
   }
   return server_socket;
@@ -59,8 +56,7 @@ void *handle_client(void *client_sock)
     memset(buff, 0, sizeof(buff));
     int ret = read(client_socket, buff, 1024);
     if (ret == -1 || ret == 0){
-      // perror("read error");
-      print_error(58,"read error");
+      print_error(__LINE__ - 2,"read error");
       close(client_socket);
       break;
     }
